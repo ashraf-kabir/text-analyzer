@@ -3,6 +3,14 @@ import axios from 'axios';
 const API_BASE_URL = 'http://localhost:5000/text-analyzer';
 
 const textAnalyzerService = {
+  setAuthToken: (token) => {
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    } else {
+      delete axios.defaults.headers.common['Authorization'];
+    }
+  },
+
   list: async () => {
     const response = await axios.get(API_BASE_URL);
     return response.data;

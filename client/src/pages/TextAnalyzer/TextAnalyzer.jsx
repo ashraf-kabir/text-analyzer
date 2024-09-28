@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback, memo } from 'react';
 import { Link } from 'react-router-dom';
+import authService from 'Services/authService';
 import textAnalyzerService from 'Services/textAnalyzerService';
 import DisplayResult from 'Components/DisplayResult';
 import { convertNewLineToBr } from 'Utils/utils';
@@ -7,26 +8,43 @@ import { convertNewLineToBr } from 'Utils/utils';
 const TextAnalyzer = () => {
   const [texts, setTexts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [result, setResult] = useState(null); // State to hold the result of actions
+  const [result, setResult] = useState(null);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await textAnalyzerService.list();
-        setTexts(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const { getToken, isAuthenticated } = authService();
 
-    fetchData();
+  const fetchData = useCallback(async () => {
+    if (!isAuthenticated) {
+      alert('You need to log in to access this feature.');
+      return;
+    }
+
+    try {
+      const token = await getToken();
+      textAnalyzerService.setAuthToken(token);
+      localStorage.setItem('token', token);
+      const data = await textAnalyzerService.list();
+      setTexts(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
   const handleDelete = async (id) => {
+    if (!isAuthenticated) {
+      alert('You need to log in to delete text.');
+      return;
+    }
+
     if (window.confirm('Are you sure you want to delete this text?')) {
       try {
+        const token = await getToken();
+        textAnalyzerService.setAuthToken(token);
         await textAnalyzerService.remove(id);
         setTexts(texts.filter((text) => text.id !== id));
       } catch (error) {
@@ -36,8 +54,16 @@ const TextAnalyzer = () => {
   };
 
   const handleAction = async (action, id) => {
+    if (!isAuthenticated) {
+      alert('You need to log in to perform this action.');
+      return;
+    }
+
     let actionResult;
     try {
+      const token = await getToken();
+      textAnalyzerService.setAuthToken(token);
+
       switch (action) {
         case 'countWords':
           actionResult = await textAnalyzerService.countWords(id);
@@ -57,7 +83,7 @@ const TextAnalyzer = () => {
         default:
           break;
       }
-      setResult(actionResult); // Set the result to state
+      setResult(actionResult);
     } catch (error) {
       console.error('Error fetching action data:', error);
       alert('Error fetching action data.');

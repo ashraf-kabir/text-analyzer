@@ -1,17 +1,36 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 import Login from 'Pages/Login';
 import TextAnalyzer from 'Pages/TextAnalyzer/TextAnalyzer';
 import AddEditText from 'Pages/TextAnalyzer/AddEditText';
 import ViewText from 'Pages/TextAnalyzer/ViewText';
 
 function App() {
+  const { isAuthenticated, isLoading } = useAuth0();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/text-analyzer" element={<TextAnalyzer />} />
-      <Route path="/text-analyzer/add" element={<AddEditText />} />
-      <Route path="/text-analyzer/edit/:id" element={<AddEditText />} />
-      <Route path="/text-analyzer/view/:id" element={<ViewText />} />
+      <Route
+        path="/text-analyzer"
+        element={isAuthenticated ? <TextAnalyzer /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/text-analyzer/add"
+        element={isAuthenticated ? <AddEditText /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/text-analyzer/edit/:id"
+        element={isAuthenticated ? <AddEditText /> : <Navigate to="/" />}
+      />
+      <Route
+        path="/text-analyzer/view/:id"
+        element={isAuthenticated ? <ViewText /> : <Navigate to="/" />}
+      />
     </Routes>
   );
 }
