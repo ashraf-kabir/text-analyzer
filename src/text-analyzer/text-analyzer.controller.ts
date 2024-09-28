@@ -37,4 +37,14 @@ export class TextAnalyzerController {
   async delete(@Param('id') id: number) {
     return this.textAnalyzerService.delete(id);
   }
+
+  @Get('count-words/:id')
+  countWords(@Param('id') id: number) {
+    return this.textAnalyzerService.countWordsById(id);
+  }
+
+  @Get('count-characters/:id')
+  countCharacters(@Param('id') id: number) {
+    return this.textAnalyzerService.countCharactersById(id);
+  }
 }

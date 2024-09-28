@@ -2,12 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Text } from './text.entity';
+import { UtilService } from '../util/util.service';
 
 @Injectable()
 export class TextAnalyzerService {
   constructor(
     @InjectRepository(Text)
     private textRepository: Repository<Text>,
+    private utilService: UtilService,
   ) {}
 
   async create(content: string): Promise<Text> {
@@ -36,6 +38,33 @@ export class TextAnalyzerService {
     const text = await this.findOne(id);
     if (text) {
       return this.textRepository.remove(text);
+    }
+    throw new Error('Text not found');
+  }
+
+  async countWordsById(id: number): Promise<{
+    givenText: string;
+    words: number;
+  }> {
+    const text = await this.findOne(id);
+    if (text) {
+      return {
+        givenText: text.content,
+        words: this.utilService.countWords(text.content),
+      };
+    }
+    throw new Error('Text not found');
+  }
+
+  async countCharactersById(
+    id: number,
+  ): Promise<{ givenText: string; characters: number }> {
+    const text = await this.findOne(id);
+    if (text) {
+      return {
+        givenText: text.content,
+        characters: this.utilService.countCharacters(text.content),
+      };
     }
     throw new Error('Text not found');
   }
