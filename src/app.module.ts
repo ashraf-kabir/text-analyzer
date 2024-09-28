@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import configuration from '../config/configuration';
+import { TextAnalyzerModule } from './text-analyzer/text-analyzer.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import configuration from '../config/configuration';
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
+    TextAnalyzerModule,
   ],
   controllers: [AppController],
   providers: [AppService],
