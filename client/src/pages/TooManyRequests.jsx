@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const TooManyRequests = () => {
-  const [countdown, setCountdown] = useState(30);
+  const [countdown, setCountdown] = useState(60);
 
   useEffect(() => {
     const countdownInterval = setInterval(() => {
