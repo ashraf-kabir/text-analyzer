@@ -1,11 +1,11 @@
 echo "Initializing project...";
 echo "Installing dependencies of server...";
 npm install;
-echo "Installing dependencies of client...";
-cd client;
-npm install;
-echo "Building environment...";
-cd ..;
+echo "Building server environment...";
 cp .env.example .env;
-echo "Environment built successfully!";
+cd client;
+echo "Installing dependencies of client...";
+npm install;
+echo "Building client environment...";
+cp .env.example .env;
 echo "Project initialized successfully!";
