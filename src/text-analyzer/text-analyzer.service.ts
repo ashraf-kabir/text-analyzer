@@ -12,9 +12,13 @@ export class TextAnalyzerService {
     private utilService: UtilService,
   ) {}
 
-  async create(content: string): Promise<Text> {
-    const text = this.textRepository.create({ content });
-    return this.textRepository.save(text);
+  async create(content: string): Promise<{ error: boolean; message: string }> {
+    if (content) {
+      const text = this.textRepository.create({ content });
+      await this.textRepository.save(text);
+      return { error: false, message: 'Text created successfully' };
+    }
+    return { error: true, message: 'Content is required' };
   }
 
   async findAll(): Promise<Text[]> {
@@ -25,11 +29,15 @@ export class TextAnalyzerService {
     return this.textRepository.findOne({ where: { id } });
   }
 
-  async update(id: number, content: string): Promise<Text> {
+  async update(
+    id: number,
+    content: string,
+  ): Promise<{ error: boolean; message: string }> {
     const text = await this.findOne(id);
     if (text) {
       text.content = content;
-      return this.textRepository.save(text);
+      await this.textRepository.save(text);
+      return { error: false, message: 'Text updated successfully' };
     }
     throw new Error('Text not found');
   }

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import textAnalyzerService from 'Services/textAnalyzerService';
 import DisplayResult from 'Components/DisplayResult';
 
@@ -21,6 +22,17 @@ const TextAnalyzer = () => {
 
     fetchData();
   }, []);
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this text?')) {
+      try {
+        await textAnalyzerService.remove(id);
+        setTexts(texts.filter((text) => text.id !== id));
+      } catch (error) {
+        console.error('Error deleting text:', error);
+      }
+    }
+  };
 
   const handleAction = async (action, id) => {
     let actionResult;
@@ -57,11 +69,19 @@ const TextAnalyzer = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Text Analyzer</h1>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">Text Analyzer</h1>
+        <Link
+          to="/text-analyzer/add"
+          className="rounded-md bg-blue-500 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-600 focus:shadow-none active:bg-blue-600 hover:bg-blue-600 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        >
+          Add Text
+        </Link>
+      </div>
       <table className="min-w-full bg-white border border-gray-200">
         <thead>
           <tr>
-            <th className="py-2 px-4 border-b text-left">ID</th>
+            <th className="py-2 px-4 border-b text-left">Id</th>
             <th className="py-2 px-4 border-b text-left">Content</th>
             <th className="py-2 px-4 border-b text-left">Actions</th>
           </tr>
@@ -72,33 +92,45 @@ const TextAnalyzer = () => {
               <td className="py-2 px-4 border-b">{text.id}</td>
               <td className="py-2 px-4 border-b">{text.content}</td>
               <td className="flex py-2 px-4 border-b gap-1">
+                <Link
+                  to={`/text-analyzer/edit/${text.id}`}
+                  className="rounded-md bg-yellow-500 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-yellow-600 focus:shadow-none active:bg-yellow-600 hover:bg-yellow-600 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={() => handleDelete(text.id)}
+                  className="rounded-md bg-red-600 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-red-700 focus:shadow-none active:bg-red-700 hover:bg-red-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                >
+                  Delete
+                </button>
                 <button
                   onClick={() => handleAction('countWords', text.id)}
-                  class="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  className="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 >
                   Count Words
                 </button>
                 <button
                   onClick={() => handleAction('countCharacters', text.id)}
-                  class="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  className="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 >
                   Count Characters
                 </button>
                 <button
                   onClick={() => handleAction('countSentences', text.id)}
-                  class="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  className="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 >
                   Count Sentences
                 </button>
                 <button
                   onClick={() => handleAction('countParagraphs', text.id)}
-                  class="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  className="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 >
                   Count Paragraphs
                 </button>
                 <button
                   onClick={() => handleAction('longestWord', text.id)}
-                  class="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  className="rounded-md bg-blue-700 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-800 focus:shadow-none active:bg-blue-800 hover:bg-blue-800 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 >
                   Longest Word
                 </button>

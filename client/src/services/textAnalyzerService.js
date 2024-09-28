@@ -8,7 +8,7 @@ const textAnalyzerService = {
     return response.data;
   },
 
-  detail: async (id) => {
+  get: async (id) => {
     const response = await axios.get(`${API_BASE_URL}/${id}`);
     return response.data;
   },
