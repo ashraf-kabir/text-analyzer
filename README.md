@@ -12,6 +12,8 @@
    - NestJS Throttler (Rate Limiting) -> please check app module ts and it has overriden once at text-analyzer controller
    - concurrently (npm package) -> to run frontend and backend concurrently
    - SSO using auth0
+   - Too Many Requests (429) -> custom exception page at frontend
+   - 404 page -> frontend when no route found
 2. ### Clone the repository
    ```bash
    git clone https://github.com/ashraf-kabir/text-analyzer.git
@@ -156,3 +158,5 @@ Ashraf Kabir
 Email: ashrafkabir95@gmail.com
 
 WhatsApp: [+8801751336666](https://wa.me/+8801751336666)
+
+Screenshots: 

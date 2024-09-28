@@ -29,8 +29,12 @@ import { CustomLogger } from './logger/logger.service';
     }),
     ThrottlerModule.forRoot([
       {
-        limit: 2,
-        ttl: 60000,
+        limit: process.env.THROTTLER_LIMIT
+          ? parseInt(process.env.THROTTLER_LIMIT, 10)
+          : 10,
+        ttl: process.env.THROTTLER_TTL
+          ? parseInt(process.env.THROTTLER_TTL, 10)
+          : 60,
       },
     ]),
     TextAnalyzerModule,

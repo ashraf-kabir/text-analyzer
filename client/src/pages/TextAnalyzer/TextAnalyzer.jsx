@@ -4,6 +4,7 @@ import authService from 'Services/authService';
 import textAnalyzerService from 'Services/textAnalyzerService';
 import DisplayResult from 'Components/DisplayResult';
 import { convertNewLineToBr } from 'Utils/utils';
+import LogoutButton from 'Components/LogoutButton';
 
 const TextAnalyzer = () => {
   const [texts, setTexts] = useState([]);
@@ -21,7 +22,6 @@ const TextAnalyzer = () => {
     try {
       const token = await getToken();
       textAnalyzerService.setAuthToken(token);
-      localStorage.setItem('token', token);
       const data = await textAnalyzerService.list();
       setTexts(data);
     } catch (error) {
@@ -98,12 +98,16 @@ const TextAnalyzer = () => {
     <div className="container mx-auto p-4">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Text Analyzer</h1>
-        <Link
-          to="/text-analyzer/add"
-          className="rounded-md bg-blue-600 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-700 focus:shadow-none active:bg-blue-700 hover:bg-blue-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-        >
-          Add Text
-        </Link>
+
+        <div className="flex gap-1">
+          <Link
+            to="/text-analyzer/add"
+            className="rounded-md bg-blue-600 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-blue-700 focus:shadow-none active:bg-blue-700 hover:bg-blue-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          >
+            Add Text
+          </Link>
+          <LogoutButton />
+        </div>
       </div>
       <table className="min-w-full bg-white border border-gray-200">
         <thead>

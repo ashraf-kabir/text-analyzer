@@ -21,7 +21,7 @@ export class TextAnalyzerController {
     private readonly logger: CustomLogger,
   ) {}
 
-  @Throttle({ default: { limit: 3, ttl: 60000 } })
+  @Throttle({ default: { limit: 4, ttl: 30000 } })
   @Post()
   async create(@Body('text') content: string) {
     this.logger.log(`Creating text with content: ${content}`);
