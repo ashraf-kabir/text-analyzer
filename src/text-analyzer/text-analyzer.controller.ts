@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { TextAnalyzerService } from './text-analyzer.service';
 import { AuthorizationGuard } from 'src/authorization/authorization.guard';
 import { CustomLogger } from 'src/logger/logger.service';
@@ -20,6 +21,7 @@ export class TextAnalyzerController {
     private readonly logger: CustomLogger,
   ) {}
 
+  @Throttle({ default: { limit: 3, ttl: 60000 } })
   @Post()
   async create(@Body('text') content: string) {
     this.logger.log(`Creating text with content: ${content}`);

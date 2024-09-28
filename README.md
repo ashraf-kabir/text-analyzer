@@ -9,7 +9,7 @@
    - TypeORM (ORM)
    - Tailwind CSS (Styling) -> very basic styling though
    - Logger (Winston) -> can be found inside combined.log, error.log
-   - NestJS Throttler (Rate Limiting)
+   - NestJS Throttler (Rate Limiting) -> please check app module ts and it has overriden once at text-analyzer controller
 2. ### Clone the repository
    ```bash
    git clone https://github.com/ashraf-kabir/text-analyzer.git
