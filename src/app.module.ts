@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import configuration from '../config/configuration';
 import { TextAnalyzerModule } from './text-analyzer/text-analyzer.module';
 import { AuthorizationModule } from './authorization/authorization.module';
+import { AuthorizationGuard } from './authorization/authorization.guard'; // Import your guard
 
 @Module({
   imports: [
@@ -27,6 +28,6 @@ import { AuthorizationModule } from './authorization/authorization.module';
     AuthorizationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, AuthorizationGuard],
 })
 export class AppModule {}
