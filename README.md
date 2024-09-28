@@ -10,6 +10,8 @@
    - Tailwind CSS (Styling) -> very basic styling though
    - Logger (Winston) -> can be found inside combined.log, error.log
    - NestJS Throttler (Rate Limiting) -> please check app module ts and it has overriden once at text-analyzer controller
+   - concurrently (npm package) -> to run frontend and backend concurrently
+   - SSO using auth0
 2. ### Clone the repository
    ```bash
    git clone https://github.com/ashraf-kabir/text-analyzer.git
@@ -20,6 +22,7 @@
    ```
    #### for mac & linux (consider non-root user)
    ```bash
+   # chmod +x initialize.sh
    ./initialize.sh
    ```
    #### for windows
@@ -50,9 +53,13 @@
    ```
 6. ### Open the browser and go to the following URL
    ```
-   http://localhost:5147
+   http://localhost:5173
    ```
-7. ### Backend API Endpoints
+7. ### Backend Base URL
+   ```
+   http://localhost:5000
+   ```
+8. ### Backend API Endpoints
 
    1. ### CRUD
 
@@ -120,3 +127,32 @@
          curl --location 'http://localhost:5000/text-analyzer/longest-word/2' \
          --header 'Authorization: Bearer <TOKEN>'
          ```
+
+
+
+### Note: Alternate instructions for manual setup
+
+```bash
+sudo git clone https://github.com/ashraf-kabir/text-analyzer.git
+cd text-analyzer
+npm install
+sudo cp .env.example .env
+cd client
+npm install
+sudo cp .env.example .env
+
+cd ..
+# go back to project root
+# serve the application frontend and backend concurrently
+npm run dev
+```
+*Note: setup mysql and create database text_analyzer and table text as mentioned above.*
+
+
+### Author
+
+Ashraf Kabir
+
+Email: ashrafkabir95@gmail.com
+
+WhatsApp: [+8801751336666](https://wa.me/+8801751336666)
