@@ -1,10 +1,13 @@
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import Login from 'Pages/Login';
+import TextAnalyzer from 'Pages/TextAnalyzer/TextAnalyzer';
 
 function App() {
   return (
-    <div className="flex justify-center items-center h-screen">
-      <h1 className="text-3xl font-bold">Hello world!</h1>
-    </div>
+    <Routes>
+      <Route path="/" element={<Login />} />
+      <Route path="/text-analyzer" element={<TextAnalyzer />} />
+    </Routes>
   );
 }
 
