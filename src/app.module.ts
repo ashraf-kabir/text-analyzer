@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import configuration from '../config/configuration';
 import { TextAnalyzerModule } from './text-analyzer/text-analyzer.module';
+import { AuthorizationModule } from './authorization/authorization.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { TextAnalyzerModule } from './text-analyzer/text-analyzer.module';
       synchronize: true,
     }),
     TextAnalyzerModule,
+    AuthorizationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -6,10 +6,13 @@ import {
   Param,
   Put,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { TextAnalyzerService } from './text-analyzer.service';
+import { AuthorizationGuard } from 'src/authorization/authorization.guard';
 
 @Controller('text-analyzer')
+@UseGuards(AuthorizationGuard)
 export class TextAnalyzerController {
   constructor(private readonly textAnalyzerService: TextAnalyzerService) {}
 
