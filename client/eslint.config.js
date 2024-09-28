@@ -3,6 +3,7 @@ import globals from 'globals';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
+import propTypes from 'eslint-plugin-prop-types';
 
 export default [
   { ignores: ['dist'] },
@@ -22,6 +23,7 @@ export default [
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'prop-types': propTypes,
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -33,6 +35,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      'react/prop-types': 'warn',
     },
   },
 ];
