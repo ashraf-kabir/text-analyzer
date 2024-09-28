@@ -4,6 +4,7 @@ import Login from 'Pages/Login';
 import TextAnalyzer from 'Pages/TextAnalyzer/TextAnalyzer';
 import AddEditText from 'Pages/TextAnalyzer/AddEditText';
 import ViewText from 'Pages/TextAnalyzer/ViewText';
+import NotFoundPage from 'Pages/NotFoundPage';
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -31,6 +32,7 @@ function App() {
         path="/text-analyzer/view/:id"
         element={isAuthenticated ? <ViewText /> : <Navigate to="/" />}
       />
+      <Route path="*" exact element={<NotFoundPage />}></Route>
     </Routes>
   );
 }
