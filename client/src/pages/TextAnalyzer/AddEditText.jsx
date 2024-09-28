@@ -60,9 +60,9 @@ const AddEditText = () => {
         <div className="flex gap-1">
           <button
             type="submit"
-            className="mt-4 bg-blue-600 text-white px-2 py-1 rounded"
+            className="mt-4 bg-green-600 text-white px-2 py-1 rounded"
           >
-            {id ? 'Update' : 'Add'} Text
+            {id ? 'Update' : 'Add'}
           </button>
           <button
             onClick={() => navigate('/text-analyzer')}

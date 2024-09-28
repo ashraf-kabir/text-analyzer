@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import textAnalyzerService from 'Services/textAnalyzerService';
 import DisplayResult from 'Components/DisplayResult';
+import { convertNewLineToBr } from 'Utils/utils';
 
 const TextAnalyzer = () => {
   const [texts, setTexts] = useState([]);
@@ -90,13 +91,24 @@ const TextAnalyzer = () => {
           {texts.map((text) => (
             <tr key={text.id}>
               <td className="py-2 px-4 border-b">{text.id}</td>
-              <td className="py-2 px-4 border-b">{text.content}</td>
+              <td
+                className="py-2 px-4 border-b"
+                dangerouslySetInnerHTML={{
+                  __html: convertNewLineToBr(text.content),
+                }}
+              ></td>
               <td className="flex py-2 px-4 border-b gap-1">
                 <Link
                   to={`/text-analyzer/edit/${text.id}`}
                   className="rounded-md bg-yellow-500 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-yellow-600 focus:shadow-none active:bg-yellow-600 hover:bg-yellow-600 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                 >
                   Edit
+                </Link>
+                <Link
+                  to={`/text-analyzer/view/${text.id}`}
+                  className="rounded-md bg-green-500 py-1 px-2.5 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-green-600 focus:shadow-none active:bg-green-600 hover:bg-green-600 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                >
+                  View
                 </Link>
                 <button
                   onClick={() => handleDelete(text.id)}

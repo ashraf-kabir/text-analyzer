@@ -14,7 +14,7 @@ export class UtilService {
   }
 
   countParagraphs(text: string): number {
-    return text.split(/\n\s*\n/).length;
+    return text.split(/\n+/).filter(Boolean).length;
   }
 
   longestWord(text: string): string {
