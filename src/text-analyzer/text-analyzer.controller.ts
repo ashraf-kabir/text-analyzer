@@ -47,4 +47,19 @@ export class TextAnalyzerController {
   countCharacters(@Param('id') id: number) {
     return this.textAnalyzerService.countCharactersById(id);
   }
+
+  @Get('count-sentences/:id')
+  countSentences(@Param('id') id: number) {
+    return this.textAnalyzerService.countSentencesById(id);
+  }
+
+  @Get('count-paragraphs/:id')
+  countParagraphs(@Param('id') id: number) {
+    return this.textAnalyzerService.countParagraphsById(id);
+  }
+
+  @Get('longest-word/:id')
+  longestWord(@Param('id') id: number) {
+    return this.textAnalyzerService.longestWordById(id);
+  }
 }

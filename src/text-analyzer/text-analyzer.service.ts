@@ -68,4 +68,43 @@ export class TextAnalyzerService {
     }
     throw new Error('Text not found');
   }
+
+  async countSentencesById(
+    id: number,
+  ): Promise<{ givenText: string; sentences: number }> {
+    const text = await this.findOne(id);
+    if (text) {
+      return {
+        givenText: text.content,
+        sentences: this.utilService.countSentences(text.content),
+      };
+    }
+    throw new Error('Text not found');
+  }
+
+  async countParagraphsById(
+    id: number,
+  ): Promise<{ givenText: string; paragraphs: number }> {
+    const text = await this.findOne(id);
+    if (text) {
+      return {
+        givenText: text.content,
+        paragraphs: this.utilService.countParagraphs(text.content),
+      };
+    }
+    throw new Error('Text not found');
+  }
+
+  async longestWordById(
+    id: number,
+  ): Promise<{ givenText: string; longestWord: string }> {
+    const text = await this.findOne(id);
+    if (text) {
+      return {
+        givenText: text.content,
+        longestWord: this.utilService.longestWord(text.content),
+      };
+    }
+    throw new Error('Text not found');
+  }
 }
