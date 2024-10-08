@@ -14,6 +14,7 @@
    - SSO using auth0
    - Too Many Requests (429) -> custom exception page at frontend
    - 404 page -> frontend when no route found
+   - Swagger API Documentation -> `http://localhost:5000/api`
 2. ### Clone the repository
    ```bash
    git clone https://github.com/ashraf-kabir/text-analyzer.git
@@ -130,8 +131,6 @@
          --header 'Authorization: Bearer <TOKEN>'
          ```
 
-
-
 ### Note: Alternate instructions for manual setup
 
 ```bash
@@ -148,8 +147,8 @@ cd ..
 # serve the application frontend and backend concurrently
 npm run dev
 ```
-*Note: setup mysql and create database text_analyzer and table text as mentioned above.*
 
+_Note: setup mysql and create database text_analyzer and table text as mentioned above._
 
 ### Author
 
@@ -159,7 +158,8 @@ Email: ashrafkabir95@gmail.com
 
 WhatsApp: [+8801751336666](https://wa.me/+8801751336666)
 
-### Some screenshots: 
+### Some screenshots:
+
 1. [https://ibb.co.com/MCLxCRw](https://ibb.co.com/MCLxCRw)
 2. [https://ibb.co.com/0nK7T5X](https://ibb.co.com/0nK7T5X)
 3. [https://ibb.co.com/v1k0sNZ](https://ibb.co.com/v1k0sNZ)

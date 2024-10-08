@@ -8,10 +8,10 @@ async function bootstrap() {
   app.setGlobalPrefix('api/v1');
 
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
-    .setDescription('The cats API description')
+    .setTitle('Text Analyzer')
+    .setDescription('The Text Analyzer API description')
     .setVersion('1.0')
-    .addTag('cats')
+    // .addTag('text-analyzer')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
