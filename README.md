@@ -2,7 +2,7 @@
 
 ## Instructions
 
-1. ### Frameworks and Tools
+1. ### Frameworks && Tools && Description
    - NestJS (Backend)
    - Vite (Frontend)
    - MySQL (Database)
