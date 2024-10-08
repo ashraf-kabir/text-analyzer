@@ -68,7 +68,7 @@
       1. Add Text CURL
 
          ```
-         curl --location 'http://localhost:5000/text-analyzer' \
+         curl --location 'http://localhost:5000/api/v1/text-analyzer' \
          --header 'Content-Type: application/json' \
          --header 'Authorization: Bearer <TOKEN>' \
          --data '{
@@ -79,18 +79,18 @@
       2. Get Texts CURL
 
          ```
-         curl --location 'http://localhost:5000/text-analyzer' \
+         curl --location 'http://localhost:5000/api/v1/text-analyzer' \
          --header 'Authorization: Bearer <TOKEN>'
          ```
 
       3. Get Text by ID CURL
          ```
-         curl --location 'http://localhost:5000/text-analyzer/1' \
+         curl --location 'http://localhost:5000/api/v1/text-analyzer/1' \
          --header 'Authorization: Bearer <TOKEN>'
          ```
       4. Update Text by ID CURL
          ```
-         curl --location --request PUT 'http://localhost:5000/text-analyzer/1' \
+         curl --location --request PUT 'http://localhost:5000/api/v1/text-analyzer/1' \
          --header 'Content-Type: application/json' \
          --header 'Authorization: Bearer <Token>' \
          --data '{
@@ -99,34 +99,34 @@
          ```
       5. Delete Text by ID CURL
          ```
-         curl --location --request DELETE 'http://localhost:5000/text-analyzer/1' \
+         curl --location --request DELETE 'http://localhost:5000/api/v1/text-analyzer/1' \
          --header 'Authorization: Bearer <Token>'
          ```
 
    2. ### Text Analysis
       1. Count Words
          ```
-         curl --location 'http://localhost:5000/text-analyzer/count-words/1' \
+         curl --location 'http://localhost:5000/api/v1/text-analyzer/count-words/1' \
          --header 'Authorization: Bearer <TOKEN>'
          ```
       2. Count Characters
          ```
-         curl --location 'http://localhost:5000/text-analyzer/count-characters/1' \
+         curl --location 'http://localhost:5000/api/v1/text-analyzer/count-characters/1' \
          --header 'Authorization: Bearer <TOKEN>'
          ```
       3. Count Sentences
          ```
-         curl --location 'http://localhost:5000/text-analyzer/count-sentences/2' \
+         curl --location 'http://localhost:5000/api/v1/text-analyzer/count-sentences/2' \
          --header 'Authorization: Bearer <TOKEN>'
          ```
       4. Count Paragraphs
          ```
-         curl --location 'http://localhost:5000/text-analyzer/count-paragraphs/1' \
+         curl --location 'http://localhost:5000/api/v1/text-analyzer/count-paragraphs/1' \
          --header 'Authorization: Bearer <TOKEN>'
          ```
       5. Longest Word
          ```
-         curl --location 'http://localhost:5000/text-analyzer/longest-word/2' \
+         curl --location 'http://localhost:5000/api/v1/text-analyzer/longest-word/2' \
          --header 'Authorization: Bearer <TOKEN>'
          ```
 
